@@ -72,7 +72,7 @@ if st.button('Predict Churn Risk', use_container_width = True):
         'MonthlyCharges'         : monthlycharges,
         'TotalCharges'           : totalcharges,
         'InternetService_DSL'            : 1 if internet  == 'DSL'            else 0,
-        'InternetService_Fibre optic'    : 1 if internet  == 'Fiber optic'    else 0,
+        'InternetService_Fiber optic'    : 1 if internet  == 'Fiber optic'    else 0,
         'InternetService_No'             : 1 if internet  == 'No'             else 0,
         'Contract_Month-to-month'        : 1 if contract  == 'Month-to-month' else 0,
         'Contract_One year'              : 1 if contract  == 'One year'       else 0,
