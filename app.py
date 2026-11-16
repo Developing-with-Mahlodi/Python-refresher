@@ -28,7 +28,7 @@ with col1:
     senior              =st.selectbox('Senior Citizen',       ['No', 'Yes'])
     partner             =st.selectbox('Partner',              ['No', 'Yes'])
     dependents          =st.selectbox('Dependents',           ['No', 'Yes'])
-    gender              =st.selectbox('Gender',               ['No', 'Yes'])
+    gender              =st.selectbox('Gender',               ['Female', 'Male'])
 
 
 with col2:
