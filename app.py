@@ -13,7 +13,7 @@ features = joblib.load('feature_columns.pkl')
 
 #---------------------------Page Config-----------------------------------------
 
-st.set_page_config(page_title = 'Churn Predictor', page_icon = '%%', layout = 'centred')
+st.set_page_config(page_title = 'Churn Predictor', page_icon = '%%', layout = 'centered')
 st.title('%% Telecom Customern Churn Preductor')
 st.markdown('Fill in the customer details below to predict churn risk')
 st.divider()
