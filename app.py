@@ -24,7 +24,7 @@ col1, col2, col3 =st.columns(3)
 with col1:
     tenure              =st.slider('Tenure (months)',        0, 72, 16)
     monthlycharges      =st.slider('Monthly Charges($)',     18, 119, 65)
-    totalCharges        =st.number_input('Total Charges($)',  0.0, 9000, float(tenure * monthlycharges))
+    totalCharges        =st.number_input('Total Charges($)',  0.0, 9000.0, float(tenure * monthlycharges))
     senior              =st.selectbox('Senior Citizen',       ['No', 'Yes'])
     partner             =st.selectbox('Partner',              ['No', 'Yes'])
     dependents          =st.selectbox('Dependents',           ['No', 'Yes'])
