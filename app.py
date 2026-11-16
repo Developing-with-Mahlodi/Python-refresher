@@ -8,7 +8,7 @@ import joblib
 
 # Load Model, Scaler, and Features
 model    = joblib.load('churn_model_2.pkl')
-scaler   = joblib.load('churn_scaler.pkl')
+scale   = joblib.load('churn_scaler.pkl')
 features = joblib.load('feature_columns.pkl')
 
 #---------------------------Page Config-----------------------------------------
@@ -82,3 +82,43 @@ if st.button('Predict Churn Risk', use_container_width = True):
         'PaymentMethod_Electronic check'                 : 1 if payment == 'Electronic check'          else 0,
         'PaymentMethod_Mailed check'                     : 1 if payment == 'Mailed check'              else 0,
           }
+
+    # Create a DataFrame
+
+    input_df = pd.DataFrame([input_dict])[features]
+
+    # Scale numeric columns
+    input_df[['tenure', 'MonthlyCharges', 'TotalCharges']] = scale.transform(input_df[['tenure', 
+                                                                                       'MonthlyCharges',
+                                                                                       'TotalCharges']])
+    # Predict
+    prob = model.predict_proba(input_df)[0][1]
+    pred  = model.predict(input_df )[0]
+
+
+    #-----------------------------------------------Result Display---------------------------------------------------
+
+    st.header('Prediction results')
+
+    if pred == 1:
+        st.error(f'HIGH CHURN RISK - {prob * 100:.1f}% probability')
+        st.markdown('**Recommendation Action!**')
+        if contract == 'Month-to-month':
+            st.warning('> Offer discount to upgrade to annual contract.')
+        if internet == 'Fiber optic':
+            st.warning('> Check service quality and offer royalty bonus.')
+        if payment == 'Electronic check':
+            st.warning('> Incentive switch to automatic payment.')
+        if tenure < 10:
+            st.warning('> Enrol in early customer service programme.')
+        if senior == 'Yes':
+            st.warning('> Assign dedicated senior support system.')
+    else:
+        st.success(f'LOW CHURN RISK - {prob * 100:.1f}% probability')
+        st.markdown('This customer is likely to stay. Kee up the good work.')
+
+
+    # Probability bar
+    st.subheader('Churn Probability')
+    st.progress(float(prob))
+    st.caption(f'Churn probability: {prob * 100:.1f}%')
